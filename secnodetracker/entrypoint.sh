@@ -14,11 +14,8 @@ if [ ! -f "/mnt/zen/secnode/ipv" ]; then
   echo "4" > /mnt/zen/secnode/ipv
 fi
 
-# Copy the zencash params
-cp -r /mnt/zen/zcash-params /mnt/zcash-params
-
 # Fix the permissons
-chown -R node:node /mnt/zen/secnode /mnt/zcash-params /home/node/secnodetracker
+chown -R node:node /mnt/zen/secnode /home/node/secnodetracker
 chmod g+rw /mnt/zen/secnode /home/node/secnodetracker
 
 cd /home/node/secnodetracker
