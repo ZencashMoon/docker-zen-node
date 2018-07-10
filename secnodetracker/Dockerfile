@@ -1,9 +1,7 @@
 FROM node:8
 
 ENV TINI_VERSION v0.16.1
-ENV VERSION=v0.2.1-beta
-ENV PRIMARY_T_ADDR=""
-ENV CHALLENGE_Z_ADDR=""
+ENV ZENCONF /home/node/secnodetracker/config/zen.conf
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 
@@ -19,9 +17,8 @@ RUN latestBaseurl="$(curl -s https://api.github.com/repos/tianon/gosu/releases |
 && gosu nobody true \
 
 WORKDIR /home/node/
-
 RUN cd /home/node/ \
-    && git clone https://github.com/ZencashMoon/secnodetracker.git \
+    && git clone --single-branch -b dev2 https://github.com/ZencashMoon/secnodetracker.git \
     && cd secnodetracker \
     && npm install
 
