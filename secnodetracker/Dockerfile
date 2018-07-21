@@ -18,7 +18,7 @@ RUN latestBaseurl="$(curl -s https://api.github.com/repos/tianon/gosu/releases |
 
 WORKDIR /home/node/
 RUN cd /home/node/ \
-    && git clone https://github.com/ZencashMoon/secnodetracker.git \
+    && git clone --single-branch -b official.3.1 https://github.com/ZencashMoon/secnodetracker.git \
     && cd secnodetracker \
     && npm install
 
