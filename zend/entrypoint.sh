@@ -31,6 +31,14 @@ else
   fi
 fi
 
+if [  -f "/mnt/zen/domain.conf" ]; then
+  domain=$(cat /mnt/zen/domain.conf)
+  echo "get domain from domain.conf, $domain"
+else
+  domain=$Z_DOMAIN
+  echo "get domain from ENV, $domain"
+fi
+
 # zcash-params can be symlinked in from an external volume or created locally
 if [ -d "/mnt/zen/zcash-params" ]; then
   if [ ! -L $HOME/.zcash-params ]; then
@@ -52,7 +60,6 @@ fi
 
 # Copy in any additional SSL trusted CA
 if [ -d "/mnt/zen/certs" ]; then
-  domain="$Z_DOMAIN"
   if [ ! -z $domain ] && [ -f /mnt/zen/certs/$domain/ca.cer ]; then
     echo "Copying additional trusted SSL certificates"
     cp /mnt/zen/certs/$domain/ca.cer /usr/local/share/ca-certificates/ca.crt > /dev/null 2>&1 || true
